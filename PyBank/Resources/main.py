@@ -1,6 +1,7 @@
 
 import csv
 import os
+from decimal import Decimal
 
 #Importing the data
 
@@ -38,11 +39,10 @@ with open('budget_data.csv') as csv_file:
             avgMarker = total            
             i += 1
        
+       print(avgMarker)
        countMonth += 1    
        totalDiff += (total - avgMarker)
-      
        avgMarker = total
-       
        avgDiff = totalDiff / countMonth
        aggregate += total
 
@@ -64,7 +64,7 @@ f.write('Financial Analysis' + "\n")
 f.write('-----------------------------------------\n')
 f.write("Total Months: " + str(countMonth) + "\n")
 f.write('Total: ' + str(aggregate) + "\n")
-f.write('Average Change: $' + str(avgDiff) + "\n")
+f.write('Average Change: $' + str(round(avgDiff, 2)) + "\n")
 f.write('Greatest Increase in Profits: ' + str(increaseDate) + ' $'+ str(increase1) + "\n")
 f.write('Greatest Decrease in Profits: ' + str(decreaseDate) + ' $'+ str(decrease1) + "\n")
 f.close()
@@ -77,5 +77,3 @@ print('Total: ' + str(aggregate))
 print('Average Change: $' + str(avgDiff))
 print('Greatest Increase in Profits: ' + str(increaseDate) + ' $'+ str(increase1))
 print('Greatest Decrease in Profits: ' + str(decreaseDate) + ' $'+ str(decrease1))
-
-

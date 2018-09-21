@@ -1,13 +1,79 @@
-# Store the file path associated with the file (note the backslash may be OS specific)
-file = 'C:\Users\Brian\UNCCHAR201808DATA3\homework\03-Python\Instructions\PyBank\Resources\budget_data.csv'
 
-# Open the file in "read" mode ('r') and store the contents in the variable "text"
-with open(file, 'r') as text:
+import csv
+import os
+from decimal import Decimal
 
-    print(text)
+#Importing the data
 
-    # Store all of the text inside a variable called "lines"
-    lines = text.read()
+with open('budget_data.csv') as csv_file:
+   CSVreader = csv.reader(csv_file)
+   
+#Skipping the header
+   
+   next(CSVreader)
 
-    # Print the contents of the text file
-    print(lines)
+#Defining variables
+   dates = []
+   finance = []
+   countMonth = 0
+   aggregate = 0
+   total = 0
+   avgDiff = 0
+   avgMarker = 0
+   totalDiff = 0
+   i = 0
+   increase1 = 0
+   decrease1 = 0
+   a = 0
+
+
+   for row in CSVreader:
+
+       date = row[0]
+       finance = row[1]
+       total = int(finance,10)
+       
+       #Skipping the first line of data to find the average
+
+       while i < 1:
+            avgMarker = total            
+            i += 1
+       
+       print(avgMarker)
+       countMonth += 1    
+       totalDiff += (total - avgMarker)
+       avgMarker = total
+       avgDiff = totalDiff / countMonth
+       aggregate += total
+
+# Greatest increase in profits
+       if total > increase1:
+           increase2 = total
+           increase1 = increase2
+           increaseDate = date
+
+# Greatest decrease in profits
+       if total < decrease1:
+           decrease2 = total
+           decrease1 = decrease2
+           decreaseDate = date
+
+           
+f = open("Output.txt" , "w")
+f.write('Financial Analysis' + "\n")
+f.write('-----------------------------------------\n')
+f.write("Total Months: " + str(countMonth) + "\n")
+f.write('Total: ' + str(aggregate) + "\n")
+f.write('Average Change: $' + str(round(avgDiff, 2)) + "\n")
+f.write('Greatest Increase in Profits: ' + str(increaseDate) + ' $'+ str(increase1) + "\n")
+f.write('Greatest Decrease in Profits: ' + str(decreaseDate) + ' $'+ str(decrease1) + "\n")
+f.close()
+
+
+print('Financial Analysis')
+print('-----------------------------------------')
+print("Total Months: " + str(countMonth))
+print('Total: ' + str(aggregate))
+print('Average Change: $' + str(avgDiff))
+print('Greatest Increase in Profits: ' + str(increaseDate) + ' $'+ str(increase1))
+print('Greatest Decrease in Profits: ' + str(decreaseDate) + ' $'+ str(decrease1))
