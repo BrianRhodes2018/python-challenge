@@ -35,15 +35,15 @@ with open(productionfile) as csv_file:
        
 f = open("Output.txt" , "w")
 f.write
-f.write('Election Results/n')
-f.write('---------------------------/n')
-f.write('Total Votes: ' + str(i))
-f.write('/n---------------------------')
+f.write('Election Results\n')
+f.write('---------------------------')
+f.write('\nTotal Votes: ' + str(i))
+f.write('\n---------------------------')
 for candidate, votes in candidateDict.items():
-    f.write(candidate + ': ' + str(round((votes / i) * 100, 3)) + '% (' + str(votes) + ')')
-f.write('/n---------------------------')
-f.write('/nWinner: ' + leadingCandidate)
-f.write('/n---------------------------')
+    f.write('\n' + candidate + ': ' + str(round((votes / i) * 100, 3)) + '% (' + str(votes) + ')')
+f.write('\n---------------------------')
+f.write('\nWinner: ' + leadingCandidate)
+f.write('\n---------------------------')
 
 
 
